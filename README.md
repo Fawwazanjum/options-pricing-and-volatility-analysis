@@ -10,23 +10,29 @@ added incrementally.
 
 - Black-Scholes pricing for European **call** and **put** options
 - Put price derived from the call price via put-call parity
+- `d1` / `d2` factored into shared helper functions (`calculate_d1`, `calculate_d2`) so
+  other modules can reuse them
+- Greeks: delta, gamma, vega, theta, rho (call and put where applicable)
 - Verified against hand calculations
 
-Everything else (Greeks, implied volatility, additional models, tests, CLI, etc.) is
-planned but not yet implemented — this README will be updated as those land.
+Everything else (implied volatility, additional models, tests, CLI, etc.) is planned
+but not yet implemented — this README will be updated as those land.
 
 ## Usage
 
 ```bash
 pip install -r requirements.txt
 python black_scholes.py
+python greeks.py
 ```
 
 ```python
 from black_scholes import black_scholes_call, black_scholes_put
+from greeks import delta_call, gamma, vega, theta_call, rho_call
 
 call_price = black_scholes_call(S=100, K=100, T=1, r=0.05, sigma=0.2)
 put_price = black_scholes_put(S=100, K=100, T=1, r=0.05, sigma=0.2)
+call_delta = delta_call(S=100, K=100, T=1, r=0.05, sigma=0.2)
 ```
 
 **Parameters**

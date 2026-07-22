@@ -1,11 +1,16 @@
 import numpy as np
 from scipy.stats import norm
 
+def calculate_d1(S, K, T, r, sigma):
+    return (np.log(S / K) + (r + (sigma**2 / 2)) * T) / (sigma * np.sqrt(T))
 
+def calculate_d2(S, K, T, r, sigma):
+    return calculate_d1(S, K, T, r, sigma) - sigma * np.sqrt(T)
+ 
 def black_scholes_call(S, K, T, r, sigma):
     '''Calculate the Black-Scholes price of a European call option'''
-    d1 = (np.log(S / K) + (r + (sigma ** 2 / 2)) * T) / (sigma * np.sqrt(T))
-    d2 = d1 - sigma * np.sqrt(T)
+    d1 = calculate_d1(S, K, T, r, sigma)
+    d2 = calculate_d2(S, K, T, r, sigma)
     call_price = S * norm.cdf(d1) - (K * np.exp(-r * T) * norm.cdf(d2))
     return call_price
 
