@@ -13,7 +13,7 @@ added incrementally.
 - `d1` / `d2` factored into shared helper functions (`calculate_d1`, `calculate_d2`) so
   other modules can reuse them
 - Greeks: delta, gamma, vega, theta, rho (call and put where applicable)
-- A couple of plots looking at how call delta behaves (see [Plots](#plots) below)
+- Plots of delta, gamma and vega against stock price (see [Plots](#plots) below)
 - Verified against hand calculations
 
 Everything else (implied volatility, additional models, tests, CLI, etc.) is planned
@@ -49,6 +49,23 @@ with so little time left, the option is close to knowing whether it'll finish in
 of the money. The longer-dated curves (T = 1, T = 2) are much more gradual, since
 there's more time for the stock price to move around before expiry, so it's harder to
 say which way it'll end up.
+
+![Gamma vs stock price](plots/gamma_vs_price.png)
+
+Gamma vs stock price. Gamma is highest when the option is roughly at the money and
+falls off the further S moves away from the strike in either direction. That makes
+sense since gamma measures how fast delta changes — near the strike, a small move in
+the stock price can flip the option from likely-to-finish-OTM to likely-to-finish-ITM,
+so delta is moving fastest there. Deep in or out of the money, delta is already close
+to 1 or 0, so it barely reacts to further moves in S.
+
+![Vega vs stock price](plots/vega_vs_price.png)
+
+Vega vs stock price. Same story as gamma — it peaks around the strike and decays on
+both sides. This is because the option's value is most sensitive to volatility when
+it's genuinely uncertain whether it'll expire in or out of the money (i.e. near the
+strike). Deep ITM or OTM, the outcome is already fairly clear, so a change in sigma
+doesn't move the price nearly as much.
 
 **Parameters**
 
