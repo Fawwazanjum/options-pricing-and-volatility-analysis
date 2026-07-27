@@ -13,6 +13,7 @@ combine quantitative finance theory with practical software engineering.
 - Plots of delta, gamma and vega against stock price (see [Plots](#plots) below)
 - Implied volatility solver (Newton-Raphson), applied to real SPY option chain data
   pulled live via `yfinance` (see [Volatility Smile](#volatility-smile) below)
+- Monte Carlo pricer, cross-checked against the Black-Scholes closed-form price
 - Verified against hand calculations
 
 ## Usage
@@ -23,6 +24,7 @@ python black_scholes.py
 python greeks.py
 python plot_greeks.py
 python market_data.py  # pulls live SPY option data, needs an internet connection
+python monte_carlo.py
 ```
 
 ```python
@@ -87,6 +89,18 @@ hours, used last-traded prices and showed a broadly similar but noisier skew, in
 two anomalous spikes traced to low-volume, stale strikes. Re-running the analysis
 during live market hours using bid/ask midpoints, which gives a more accurate value of
 the option, produced a cleaner, more pronounced skew.
+
+## Monte Carlo Pricer
+
+Monte Carlo isn't strictly necessary for a European call like this one — Black-Scholes
+already gives an exact closed-form answer (10.45 for `S=K=100, T=1, r=0.05, sigma=0.2`).
+But Monte Carlo generalizes to option types where no closed-form solution exists (path
+dependent payoffs, early exercise, etc.), so `monte_carlo.py` simulates the same option
+by drawing random terminal stock prices under the risk-neutral measure and averaging
+the discounted payoffs. Running it at increasing simulation counts (100 up to 1,000,000)
+shows the price converging toward the known 10.45 as the number of simulations grows,
+which is a useful sanity check before trusting the method on cases where the "true"
+answer isn't already known.
 
 **Parameters**
 
