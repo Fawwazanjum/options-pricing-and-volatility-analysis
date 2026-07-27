@@ -39,7 +39,7 @@ def implied_volatility(market_price, S, K, T, r, initial_guess = 1.5, tolerance 
     print("Warning: implied volatility did not converge")
     return sigma
 
-# if __name__ == "__main__":
+if __name__ == "__main__":
     # Test: use your known test case in reverse.
     # You know that S=100, K=100, T=1, r=0.05, sigma=0.2 gives a price of 10.45.
     # So feed 10.45 back in as the "market price" and check you recover sigma=0.2.
