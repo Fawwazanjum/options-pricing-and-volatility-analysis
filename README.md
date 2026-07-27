@@ -3,10 +3,7 @@
 A from-scratch implementation of options pricing models in Python, built as a way to
 combine quantitative finance theory with practical software engineering.
 
-This is an early, in-progress checkpoint. More models, analysis, and tooling are being
-added incrementally.
-
-## Current status (Phase 1)
+## Features
 
 - Black-Scholes pricing for European **call** and **put** options
 - Put price derived from the call price via put-call parity
@@ -17,9 +14,6 @@ added incrementally.
 - Implied volatility solver (Newton-Raphson), applied to real SPY option chain data
   pulled live via `yfinance` (see [Volatility Smile](#volatility-smile) below)
 - Verified against hand calculations
-
-Everything else (additional models, tests, CLI, etc.) is planned but not yet
-implemented — this README will be updated as those land.
 
 ## Usage
 
