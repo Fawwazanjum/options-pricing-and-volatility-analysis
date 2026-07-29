@@ -92,8 +92,8 @@ the option, produced a cleaner, more pronounced skew.
 
 ## Monte Carlo Pricer
 
-Monte Carlo isn't strictly necessary for a European call like this one — Black-Scholes
-already gives an exact closed-form answer (10.45 for `S=K=100, T=1, r=0.05, sigma=0.2`).
+Monte Carlo isn't strictly necessary for a European call like this one as Black-Scholes
+already gives an exact closed-form answer (10.45 for `S=K=100, T=1, r=0.05, sigma=0.2`),
 But Monte Carlo generalizes to option types where no closed-form solution exists (path
 dependent payoffs, early exercise, etc.), so `monte_carlo.py` simulates the same option
 by drawing random terminal stock prices under the risk-neutral measure and averaging
